@@ -7,7 +7,13 @@ require("dotenv").config();
 const app = express();
 const authRoutes = require("./routes/auth");
 
-app.use(cors());
+// Allow only Vercel frontend to access the backend
+app.use(
+  cors({
+    origin: 'https://kids-learning-iota.vercel.app',
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 app.use("/api", authRoutes);
